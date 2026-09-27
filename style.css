@@ -1,0 +1,479 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    min-height: 100vh;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.app-wrapper {
+    width: 100%;
+    max-width: 700px;
+    margin: auto;
+    padding: 16px;
+}
+
+/* CABEÇALHO */
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+    gap: 10px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.brand-icon {
+    font-size: 38px;
+}
+
+.brand-text h1 {
+    font-size: 22px;
+    color: #fff;
+}
+
+.badge {
+    font-size: 11px;
+    color: #94a3b8;
+}
+
+.status-pill {
+    background: #14532d;
+    color: #86efac;
+    padding: 7px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    background: #22c55e;
+    border-radius: 50%;
+}
+
+/* CARDS */
+
+.card {
+    background: #1e293b;
+    border: 1px solid #334155;
+    border-radius: 18px;
+    padding: 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,.18);
+}
+
+/* SALDO */
+
+.balance-card {
+    background: linear-gradient(145deg, #1e293b, #172033);
+}
+
+.balance-label {
+    font-size: 11px;
+    color: #94a3b8;
+    letter-spacing: 1px;
+}
+
+.balance-amount {
+    font-size: 34px;
+    margin: 8px 0 20px;
+    color: #fff;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.summary-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: #0f172a;
+    padding: 12px;
+    border-radius: 12px;
+}
+
+.summary-icon {
+    font-size: 18px;
+}
+
+.summary-item small {
+    display: block;
+    color: #94a3b8;
+    font-size: 11px;
+}
+
+.summary-item strong {
+    color: #fff;
+    font-size: 15px;
+}
+
+/* CHAT */
+
+.chat-header {
+    margin-bottom: 12px;
+}
+
+.chat-header h3 {
+    font-size: 17px;
+    color: #fff;
+}
+
+.chat-header small {
+    color: #94a3b8;
+}
+
+.chat-box {
+    background: #0f172a;
+    border-radius: 14px;
+    padding: 12px;
+    height: 260px;
+    overflow-y: auto;
+    margin-bottom: 12px;
+}
+
+.message {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.avatar {
+    width: 34px;
+    height: 34px;
+    background: #334155;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.msg-bubble {
+    background: #334155;
+    padding: 10px 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    line-height: 1.45;
+    max-width: 85%;
+}
+
+.msg-time {
+    display: block;
+    font-size: 10px;
+    color: #94a3b8;
+    margin-top: 5px;
+}
+
+.message.user {
+    justify-content: flex-end;
+}
+
+.message.user .msg-bubble {
+    background: #2563eb;
+}
+
+.chat-input-bar {
+    display: flex;
+    gap: 8px;
+}
+
+.chat-input-bar input {
+    flex: 1;
+    min-width: 0;
+    background: #0f172a;
+    border: 1px solid #475569;
+    border-radius: 12px;
+    color: #fff;
+    padding: 12px;
+    outline: none;
+}
+
+.chat-input-bar input:focus {
+    border-color: #3b82f6;
+}
+
+.icon-btn,
+.send-btn {
+    border: none;
+    width: 45px;
+    border-radius: 12px;
+    color: white;
+}
+
+.voice-btn {
+    background: #475569;
+}
+
+.send-btn {
+    background: #2563eb;
+}
+
+/* AÇÕES */
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.action-btn {
+    border: none;
+    padding: 15px 10px;
+    border-radius: 14px;
+    color: white;
+    font-weight: bold;
+}
+
+.expense-btn {
+    background: #dc2626;
+}
+
+.income-btn {
+    background: #16a34a;
+}
+
+.action-btn span {
+    font-size: 18px;
+}
+
+/* RESUMO */
+
+.mini-summary-header,
+.mini-summary-body {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.mini-summary-header {
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.highlight-date {
+    color: #60a5fa;
+}
+
+.mini-summary-body {
+    color: #cbd5e1;
+    font-size: 13px;
+}
+
+/* HISTÓRICO */
+
+.history-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.history-header h3 {
+    font-size: 17px;
+}
+
+.text-btn {
+    background: transparent;
+    border: none;
+    color: #f87171;
+    font-size: 12px;
+}
+
+.history-item {
+    background: #0f172a;
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.history-description {
+    font-weight: bold;
+}
+
+.history-category,
+.history-date {
+    color: #94a3b8;
+    font-size: 11px;
+    margin-top: 4px;
+}
+
+.history-value {
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.history-value.expense {
+    color: #f87171;
+}
+
+.history-value.income {
+    color: #4ade80;
+}
+
+.empty-state {
+    text-align: center;
+    color: #64748b;
+    padding: 25px 10px;
+    font-size: 13px;
+}
+
+/* RODAPÉ */
+
+.app-footer {
+    text-align: center;
+    color: #64748b;
+    font-size: 11px;
+    padding: 15px 0;
+}
+
+/* MODAL */
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.75);
+    z-index: 1000;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 450px;
+    background: #1e293b;
+    border-radius: 18px;
+    padding: 18px;
+    border: 1px solid #475569;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.modal-header h3 {
+    color: white;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    font-size: 20px;
+}
+
+.form-group {
+    margin-bottom: 14px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 12px;
+    color: #cbd5e1;
+    margin-bottom: 6px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    background: #0f172a;
+    border: 1px solid #475569;
+    border-radius: 10px;
+    color: white;
+    outline: none;
+}
+
+.modal-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.btn-cancel,
+.btn-submit {
+    border: none;
+    padding: 13px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+.btn-cancel {
+    background: #475569;
+    color: white;
+}
+
+.btn-submit {
+    background: #2563eb;
+    color: white;
+}
+
+/* CELULAR */
+
+@media (max-width: 480px) {
+
+    .app-wrapper {
+        padding: 10px;
+    }
+
+    .brand-text h1 {
+        font-size: 19px;
+    }
+
+    .status-pill {
+        font-size: 10px;
+        padding: 6px 8px;
+    }
+
+    .balance-amount {
+        font-size: 29px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+}
