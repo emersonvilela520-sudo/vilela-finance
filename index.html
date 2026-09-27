@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vilela Finance — Assistente Financeiro Pessoal</title>
+    
+    <!-- CSS e PWA -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0F172A">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+
+    <div class="app-wrapper">
+        <!-- CABEÇALHO COM IDENTIDADE -->
+        <header class="app-header">
+            <div class="brand">
+                <span class="brand-icon">💰</span>
+                <div class="brand-text">
+                    <h1>Vilela Finance</h1>
+                    <span class="badge">Assistente Financeiro Pessoal</span>
+                </div>
+            </div>
+            <div class="status-pill">
+                <span class="dot"></span> Online
+            </div>
+        </header>
+
+        <!-- CARTÃO DE SALDO E RESUMO -->
+        <section class="card balance-card">
+            <span class="balance-label">SALDO DISPONÍVEL</span>
+            <h2 class="balance-amount" id="balance-amount">R$ 0,00</h2>
+            
+            <div class="summary-grid">
+                <div class="summary-item income">
+                    <span class="summary-icon">🟢</span>
+                    <div>
+                        <small>Receitas</small>
+                        <strong id="total-income">R$ 0,00</strong>
+                    </div>
+                </div>
+                <div class="summary-item expense">
+                    <span class="summary-icon">🔴</span>
+                    <div>
+                        <small>Despesas</small>
+                        <strong id="total-expense">R$ 0,00</strong>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAT CONVERSACIONAL COM O VILELA -->
+        <section class="card chat-card">
+            <div class="chat-header">
+                <h3>💬 Conversar com o Vilela</h3>
+                <small id="voice-status">Toque no microfone para falar</small>
+            </div>
+
+            <div class="chat-box" id="chat-box">
+                <div class="message assistant">
+                    <div class="avatar">🤖</div>
+                    <div class="msg-bubble">
+                        <strong>Vilela:</strong> Olá! Eu sou o <strong>Vilela</strong>, seu assistente financeiro. Como posso ajudar nas suas finanças hoje?
+                        <span class="msg-time">Agora</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENTRADA DE COMANDOS (TEXTO + VOZ) -->
+            <div class="chat-input-bar">
+                <button type="button" id="btn-voice" class="icon-btn voice-btn" title="Falar com o Vilela">
+                    🎤
+                </button>
+                <input 
+                    type="text" 
+                    id="chat-input" 
+                    placeholder="Ex: Gastei 35 reais no almoço..." 
+                    autocomplete="off"
+                >
+                <button type="button" id="btn-send" class="send-btn" title="Enviar mensagem">
+                    ➤
+                </button>
+            </div>
+        </section>
+
+        <!-- BOTOES DE AÇÃO RÁPIDA (REGISTRO MANUAL) -->
+        <section class="actions-grid">
+            <button type="button" class="action-btn expense-btn" onclick="abrirModal('despesa')">
+                <span>➖</span> Adicionar Gasto
+            </button>
+            <button type="button" class="action-btn income-btn" onclick="abrirModal('receita')">
+                <span>➕</span> Adicionar Receita
+            </button>
+        </section>
+
+        <!-- RESUMO DO DIA -->
+        <section class="card mini-summary-card">
+            <div class="mini-summary-header">
+                <span>📊 Resumo de Hoje</span>
+                <span class="highlight-date" id="current-date-label">--/--/----</span>
+            </div>
+            <div class="mini-summary-body">
+                <span>Gastos Hoje: <strong id="today-expense">R$ 0,00</strong></span>
+                <span>Lançamentos: <strong id="today-count">0</strong></span>
+            </div>
+        </section>
+
+        <!-- HISTÓRICO DE LANÇAMENTOS -->
+        <section class="card history-card">
+            <div class="history-header">
+                <h3>📋 Histórico Recente</h3>
+                <button type="button" class="text-btn" onclick="limparTudo()">Limpar Tudo</button>
+            </div>
+            <div class="history-list" id="history-list">
+                <div class="empty-state">Nenhum lançamento registrado ainda.</div>
+            </div>
+        </section>
+
+        <!-- RODAPÉ -->
+        <footer class="app-footer">
+            <p><strong>Vilela Finance</strong> — Seu Assistente Financeiro Pessoal</p>
+        </footer>
+    </div>
+
+    <!-- MODAL DE CADASTRO MANUAL -->
+    <div class="modal-overlay" id="modal-overlay">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modal-title">Novo Lançamento</h3>
+                <button class="close-btn" onclick="fecharModal()">✕</button>
+            </div>
+            <form id="manual-form">
+                <input type="hidden" id="form-type" value="despesa">
+                
+                <div class="form-group">
+                    <label for="form-value">Valor (R$) *</label>
+                    <input type="number" id="form-value" step="0.01" placeholder="0,00" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="form-description">Descrição *</label>
+                    <input type="text" id="form-description" placeholder="Ex: Almoço, Gasolina, Salário..." required>
+                </div>
+
+                <div class="form-group">
+                    <label for="form-category">Categoria</label>
+                    <select id="form-category">
+                        <option value="Alimentação">🍔 Alimentação</option>
+                        <option value="Transporte">⛽ Transporte</option>
+                        <option value="Casa">🏠 Casa</option>
+                        <option value="Saúde">🏥 Saúde</option>
+                        <option value="Lazer">🎉 Lazer</option>
+                        <option value="Educação">📚 Educação</option>
+                        <option value="Contas">📄 Contas</option>
+                        <option value="Compras">🛍️ Compras</option>
+                        <option value="Salário">💰 Salário</option>
+                        <option value="Outros">📦 Outros</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="form-date">Data Oficial</label>
+                    <input type="date" id="form-date">
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-cancel" onclick="fecharModal()">Cancelar</button>
+                    <button type="submit" class="btn-submit">Salvar Lançamento</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+  </html>
